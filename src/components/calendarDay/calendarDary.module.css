@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: .5rem;
+  color: #F4EEE0;
+  padding: 2rem;
+  background: linear-gradient(#393646, #6D5D6E);
+  box-shadow: .1rem .1rem .5rem #222222ad;
+  gap: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.select {
+  text-align: center;
+  padding:  .4rem 1rem;
+  background-color: #F4EEE0;
+  border-radius: .5rem;
+  outline: none;
+  border: none;
+  box-shadow: .1rem .1rem .2rem #222222ad;
+  margin-bottom: 2rem;
+}
+
+.datePicker {
+  text-align: center;
+  padding:  .4rem 1rem;
+  background-color: #F4EEE0;
+  border-radius: .5rem;
+  outline: none;
+  border: none;
+  box-shadow: .1rem .1rem .2rem #222222ad;
+  margin-bottom: 1rem;
+} .datePicker::placeholder {
+  color: #393646;
+}
+
+.button {
+  font-weight: bold;
+  background-color: #4F4557;
+  color: #FFF2F2;
+  padding: .7rem 1rem;
+  border: .1rem solid #6D5D6E;
+  box-shadow: .1rem .1rem .3rem #00000087;
+  border-radius: .5rem;
+  transition: .5s;
+}
+ .button:hover {
+  color: #393646;
+  background-color:  #FFF2F2;
+  border: .1rem solid #4F4557;
+  box-shadow: .1rem .1rem .5rem #0000009d;
+}

@@ -1,9 +1,9 @@
 .menu {
+  display: flex;
+  justify-content: flex-start;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  display: flex;
-  justify-content: flex-start;
   margin-bottom: 1rem;
 }
 
@@ -20,6 +20,7 @@
   overflow: hidden;
   border-radius: .5rem;
   box-shadow: .1rem .1rem .8rem #00000073;
+  transition: .4s;
 }
 
 .name {
