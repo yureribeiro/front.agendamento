@@ -1,13 +1,11 @@
-'use client'
-import { useUserContext } from "@/context"
-export default function PainelPage() {
-  const { userName, userId } = useUserContext()
+import Perfil from "@/components/perfilUser/parfil"
+import Nav from "@/components/nav/nav"
 
+export default function PainelPage() {
   return (
     <div>
-      <h1>painel logado</h1>
-      <p>usuario: {userName}</p>
-      <p>id: {userId}</p>
+      <Nav />
+      <Perfil />
     </div>
   )
 }

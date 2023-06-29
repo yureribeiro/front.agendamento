@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.text {
+  color: #4F4557;
+  font-weight: bold;
+}
+
+.name {
+  color: #393646;
+}
