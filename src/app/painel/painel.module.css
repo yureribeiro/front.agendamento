@@ -7,7 +7,7 @@
   gap: 1rem;
 }
 
-.card {
+.appointment {
   display: flex;
   gap: .5rem;
   align-items: center;
@@ -20,4 +20,27 @@
   color: #F4EEE0;
   background: linear-gradient(#393646, #6D5D6E);
   box-shadow: .1rem .1rem .5rem #222222ad;
+}
+
+.sectionCards {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: .5rem;
+  padding: 1rem;
+  background: linear-gradient(#393646, #6D5D6E);
+  box-shadow: .1rem .1rem .5rem #222222ad;
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  border-radius: .5rem;
 }
