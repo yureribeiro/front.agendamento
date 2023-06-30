@@ -18,6 +18,12 @@
   width: 90%;
 }
 
+.contentName {
+  display: flex;
+  align-items: center; 
+  gap: .5rem;
+}
+
 .name {
   font-weight: bold;
 }

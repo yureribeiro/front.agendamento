@@ -9,6 +9,8 @@
 
 .card {
   display: flex;
+  gap: .5rem;
+  align-items: center;
   justify-content: flex-start;
   text-decoration: none;
   font-weight: bold;

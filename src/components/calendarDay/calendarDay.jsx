@@ -1,14 +1,16 @@
 'use client'
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import DatePicker from "react-datepicker"
 import { useUserContext } from "@/context"
 
-import pt from 'date-fns/locale/PT'
 import "../../../node_modules/react-datepicker/dist/react-datepicker.css"
 import styles from './calendarDary.module.css'
+import calendarAdd from '../../../public/calendar-add.svg'
+import pt from 'date-fns/locale/PT'
 
 import { registerLocale, setDefaultLocale } from "react-datepicker"
 import { addDays } from "date-fns"
+import Image from "next/image"
 
 export default function CalendarDay() {
   const [startDate, setStartDate] = useState(null)
@@ -69,9 +71,12 @@ export default function CalendarDay() {
   }
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <h2>Agendamento</h2>
-      <p className={styles.name}>{userName}</p>
+      <div className={styles.contentName}>
+        <Image src={calendarAdd} alt="Agendar" />
+        <p className={styles.name}>{userName}</p>
+      </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <label className={styles.label}>Dia:</label>
         <DatePicker
@@ -109,6 +114,6 @@ export default function CalendarDay() {
         </button>
         {error && <p className={styles.error}>{error}</p>}
       </form>
-    </div>
+    </main>
   )
 }
