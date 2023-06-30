@@ -8,10 +8,11 @@ export default function Form() {
   const [error, setError] = useState('')
   const router = useRouter()
   const { handleChangeUser } = useUserContext()
+  const [loading, setLoading] = useState(false)
 
   async function handleLogin(e) {
     e.preventDefault()
-
+    setLoading(true)
     try {
       const response = await fetch('http://localhost:3001/login', {
         method: 'POST',
@@ -23,10 +24,12 @@ export default function Form() {
       const data = await response.json()
       console.log(data)
       if (data.exists === true) {
+        setLoading(false)
         handleChangeUser(data.name, data.userId)
         router.push('/painel')
       }
     } catch (error) {
+      setLoading(false)
       console.error(error.message)
       setError('Ouve um erro no servidor, tente novamente por favor.')
     }
@@ -42,7 +45,13 @@ export default function Form() {
         placeholder='digite seu número'
         onChange={(e) => setTelNumber(e.target.value)}
       />
-      <button onClick={handleLogin} className={styles.button}>Entrar</button>
+      <button
+        onClick={handleLogin}
+        className={styles.button}
+      > {loading
+        ? 'Carregando...'
+        : 'Entrar'}
+      </button>
       {error && <small className={styles.error}>{error}</small>}
     </form>
   )

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import DatePicker from "react-datepicker"
 import { useUserContext } from "@/context"
 
@@ -13,8 +13,12 @@ import { addDays } from "date-fns"
 export default function CalendarDay() {
   const [startDate, setStartDate] = useState(null)
   const [startTime, setStartTime] = useState(new Date())
-  const [serviceType, setServiceType] = useState("HAND_AND_FOOT")
+  const [serviceType, setServiceType] = useState('')
+
   const { userName, userId } = useUserContext()
+
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   registerLocale('pt', pt)
   setDefaultLocale('pt')
@@ -22,23 +26,22 @@ export default function CalendarDay() {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    let endTime = new Date(startTime)
-
+    const endTime = new Date(startTime)
     if (serviceType === "HAND" || serviceType === "FOOT") {
-      endTime.setHours(endTime.getHours() + 1)
-    } else {
-      endTime.setHours(endTime.getHours() + 2)
+      endTime.setHours(startTime.getHours() + 1)
+    } else if (serviceType === "HAND_AND_FOOT") {
+      endTime.setHours(startTime.getHours() + 2)
     }
-
 
     const appointmentData = {
       startTime: startTime,
-      endTime: startTime,
+      endTime: endTime,
       dayOfWeek: startDate,
       serviceType: serviceType,
     }
 
     try {
+      setLoading(true)
       const response = await fetch(`http://localhost:3001/appointments/${userId}`, {
         method: 'POST',
         headers: {
@@ -48,13 +51,16 @@ export default function CalendarDay() {
       })
 
       if (response.ok) {
+        setLoading(false)
         const appointment = await response.json()
         console.log(appointment)
       } else {
-        throw new Error('Erro interno do servidor')
+        setLoading(false)
+        setError('Verifique se preencheu corretamente os campos')
       }
     } catch (error) {
-      console.log(error)
+      setLoading(false)
+      setError('tente novamente ou contate o suporte')
     }
   }
 
@@ -70,7 +76,6 @@ export default function CalendarDay() {
         <label className={styles.label}>Dia:</label>
         <DatePicker
           className={styles.datePicker}
-          showIcon
           locale="pt"
           selected={startDate}
           onChange={(date) => setStartDate(date)}
@@ -95,7 +100,14 @@ export default function CalendarDay() {
           <option value="FOOT">Pé</option>
           <option value="HAND">Mão</option>
         </select>
-        <button className={styles.button} type="submit">Agendar Horário</button>
+        <button
+          className={styles.button}
+          type="submit"
+        > {loading
+          ? 'Carregando...'
+          : 'Agendar Horário'}
+        </button>
+        {error && <p className={styles.error}>{error}</p>}
       </form>
     </div>
   )
