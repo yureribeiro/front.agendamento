@@ -38,6 +38,11 @@
   box-shadow: .1rem .1rem .5rem #222222ad;
 }
 
+.label {
+  margin-bottom: .5rem;
+  color: #393646;
+}
+
 .history {
   display: flex;
   flex-direction: column;

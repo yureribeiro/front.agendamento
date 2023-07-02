@@ -13,6 +13,8 @@ export default function Form() {
   async function handleLogin(e) {
     e.preventDefault()
     setLoading(true)
+    setError('')
+
     try {
       const response = await fetch('http://localhost:3001/login', {
         method: 'POST',
@@ -22,8 +24,11 @@ export default function Form() {
         body: JSON.stringify({ telNumber }),
       })
       const data = await response.json()
-      console.log(data)
-      if (data.exists === true) {
+
+      if (data.exists === false) {
+        setLoading(false)
+        setError('Número de telefone inválido.')
+      } else if (data.exists === true) {
         setLoading(false)
         handleChangeUser(data.name, data.userId)
         router.push('/painel')
@@ -43,6 +48,7 @@ export default function Form() {
         type="text"
         value={telNumber}
         placeholder='digite seu número'
+        required={true}
         onChange={(e) => setTelNumber(e.target.value)}
       />
       <button
