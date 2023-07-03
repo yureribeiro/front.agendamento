@@ -11,6 +11,7 @@ import pt from 'date-fns/locale/PT'
 import { registerLocale, setDefaultLocale } from "react-datepicker"
 import { addDays } from "date-fns"
 import Image from "next/image"
+import Feedback from "../feedback/feedback"
 
 export default function CalendarDay() {
   const [startDate, setStartDate] = useState(null)
@@ -21,6 +22,7 @@ export default function CalendarDay() {
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [feedback, setFeedback] = useState(false)
 
   registerLocale('pt', pt)
   setDefaultLocale('pt')
@@ -54,8 +56,8 @@ export default function CalendarDay() {
 
       if (response.ok) {
         setLoading(false)
-        const appointment = await response.json()
-        console.log(appointment)
+        await response.json()
+        setFeedback(true)
       } else {
         setLoading(false)
         setError('Verifique se preencheu corretamente os campos')
@@ -114,6 +116,7 @@ export default function CalendarDay() {
         </button>
         {error && <p className={styles.error}>{error}</p>}
       </form>
+      {feedback ? <Feedback title={'Tudo certo 💖'} description={'Horário agendado com sucesso!'} /> : null}
     </main>
   )
 }
