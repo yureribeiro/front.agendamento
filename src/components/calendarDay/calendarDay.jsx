@@ -12,7 +12,7 @@ import { addDays } from "date-fns"
 import Image from "next/image"
 import Feedback from "../feedback/feedback"
 
-import { pt } from 'date-fns/locale/PT'
+import { pt } from 'date-fns/locale/pt'
 
 registerLocale('pt', pt)
 setDefaultLocale('pt')
