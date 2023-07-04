@@ -6,12 +6,16 @@ import { useUserContext } from "@/context"
 import "../../../node_modules/react-datepicker/dist/react-datepicker.css"
 import styles from './calendarDary.module.css'
 import calendarAdd from '../../../public/calendar-add.svg'
-import pt from 'date-fns/locale/PT'
 
 import { registerLocale, setDefaultLocale } from "react-datepicker"
 import { addDays } from "date-fns"
 import Image from "next/image"
 import Feedback from "../feedback/feedback"
+
+import { pt } from 'date-fns/locale/PT'
+
+registerLocale('pt', pt)
+setDefaultLocale('pt')
 
 export default function CalendarDay() {
   const [startDate, setStartDate] = useState(null)
@@ -24,8 +28,6 @@ export default function CalendarDay() {
   const [error, setError] = useState('')
   const [feedback, setFeedback] = useState(false)
 
-  registerLocale('pt', pt)
-  setDefaultLocale('pt')
 
   const handleSubmit = async (event) => {
     event.preventDefault()
