@@ -25,8 +25,8 @@ export function UserProvider({ children }) {
     localStorage.setItem('userId', userId)
   }, [])
 
-  const handleLogout = (userName, userId) => {
-    localStorage.removeItem('userName',)
+  const handleLogout = () => {
+    localStorage.removeItem('userName')
     localStorage.removeItem('userId')
     setUserName('')
     setUserId(0)
