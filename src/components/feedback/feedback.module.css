@@ -1,16 +1,40 @@
 .container {
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  border:.1rem solid #F4EEE0;
+  border-radius: .5rem;
+  padding: 1rem;
+  color: #F4EEE0;
+  background: linear-gradient(#393646, #614b62);
+  box-shadow: .1rem .1rem .5rem #000000;
 }
 
 .title {
-  color: #4a4a4a;
+  color: #F4EEE0;
+  text-align: center;
 }
 
 .description {
-  color: #4a4a4a;
+  color: #F4EEE0;
+  text-align: center;
+}
+
+.button {
+  margin-top: 1rem;
+  background-color: #393646;
+  color: #F4EEE0;
   font-weight: bold;
+  font-size: 1rem;
+  padding: .5rem 2rem;
+  box-shadow: .1rem .1rem .3rem #00000087;
+  border: none;
+  border-radius: .5rem;
+  transition: .5s;
+}
+ .button:hover {
+  color: #4F4557;
+  background-color: #F4EEE0;
+  box-shadow: .1rem .1rem .5rem #0000009d;
 }

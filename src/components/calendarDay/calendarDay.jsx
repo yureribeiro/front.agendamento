@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import DatePicker from "react-datepicker"
 import { useUserContext } from "@/context"
 
@@ -71,6 +71,11 @@ export default function CalendarDay() {
   const handleServiceTypeChange = (event) => {
     setServiceType(event.target.value)
   }
+
+  useEffect(() => {
+    setFeedback(false)
+  }, [])
+
 
   return (
     <main className={styles.container}>

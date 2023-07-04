@@ -1,16 +1,21 @@
 'use client'
+import Image from "next/image"
 import React, { useState, useEffect } from "react"
 import { useUserContext } from "@/context"
 import { format, parseISO } from 'date-fns'
-import styles from './historyClient.module.css'
-import Image from "next/image"
+
 import CalendarDelete from '../../../public/calendar-x.svg'
+import Feedback from "../feedback/feedback"
+
+import styles from './historyClient.module.css'
 
 export default function HistoryClient() {
   const { userId } = useUserContext()
   const [appointments, setAppointments] = useState([])
+  const [feedback, setFeedback] = useState(false)
 
   useEffect(() => {
+    setFeedback(false)
     async function fetchAppointments() {
       const appointments = await fetch(`http://localhost:3001/appointments/${userId}`, {
         method: 'GET'
@@ -22,18 +27,24 @@ export default function HistoryClient() {
 
 
   const handleDeleteAppointment = (appointmentId) => {
-    fetch(`http://localhost:3001/appointments/${userId}/${appointmentId}`, {
-      method: 'DELETE'
-    }).then(() => {
-      console.log(appointmentId)
-      setAppointments(prevAppointments =>
-        prevAppointments.filter(appointment => appointment.id !== appointmentId)
-      )
-    })
-      .catch((err) => {
-        console.log(err)
+    const confirm = window.confirm('tem certeza que deseja deletar este agendamento?')
+
+    if (confirm) {
+      fetch(`http://localhost:3001/appointments/${userId}/${appointmentId}`, {
+        method: 'DELETE'
+      }).then(() => {
+        setAppointments(prevAppointments =>
+          prevAppointments.filter(appointment => appointment.id !== appointmentId)
+        )
       })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else {
+      return
+    }
   }
+
 
   return (
     <div className={styles.container}>
@@ -59,6 +70,7 @@ export default function HistoryClient() {
       ) : (
         <p className={styles.noHistory}>Você ainda não fez nenhum agendamento...</p>
       )}
+      {feedback && <Feedback />}
     </div>
   )
 }
