@@ -16,7 +16,7 @@ export default function Form() {
     setError('')
 
     try {
-      const response = await fetch('http://localhost:3001/login', {
+      const response = await fetch('https://natalia-api.vercel.app/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

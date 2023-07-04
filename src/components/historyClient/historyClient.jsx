@@ -5,19 +5,16 @@ import { useUserContext } from "@/context"
 import { format, parseISO } from 'date-fns'
 
 import CalendarDelete from '../../../public/calendar-x.svg'
-import Feedback from "../feedback/feedback"
 
 import styles from './historyClient.module.css'
 
 export default function HistoryClient() {
   const { userId } = useUserContext()
   const [appointments, setAppointments] = useState([])
-  const [feedback, setFeedback] = useState(false)
 
   useEffect(() => {
-    setFeedback(false)
     async function fetchAppointments() {
-      const appointments = await fetch(`http://localhost:3001/appointments/${userId}`, {
+      const appointments = await fetch(`https://natalia-api.vercel.app/appointments/${userId}`, {
         method: 'GET'
       })
       setAppointments(await appointments.json())
@@ -30,7 +27,7 @@ export default function HistoryClient() {
     const confirm = window.confirm('tem certeza que deseja deletar este agendamento?')
 
     if (confirm) {
-      fetch(`http://localhost:3001/appointments/${userId}/${appointmentId}`, {
+      fetch(`https://natalia-api.vercel.app/appointments/${userId}/${appointmentId}`, {
         method: 'DELETE'
       }).then(() => {
         setAppointments(prevAppointments =>
@@ -63,14 +60,16 @@ export default function HistoryClient() {
                 </div>
                 <p className={styles.service}>{appointment.serviceType}</p>
               </div>
-              <Image src={CalendarDelete} onClick={() => handleDeleteAppointment(appointment.id)} alt="deletar agendamento" />
+              <div className={styles.deleteAppointment} onClick={() => handleDeleteAppointment(appointment.id)}>
+                <Image src={CalendarDelete} alt="deletar agendamento" />
+                <small>Deletar</small>
+              </div>
             </div>
           )
         })
       ) : (
         <p className={styles.noHistory}>Você ainda não fez nenhum agendamento...</p>
       )}
-      {feedback && <Feedback />}
     </div>
   )
 }

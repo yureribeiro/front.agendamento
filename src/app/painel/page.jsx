@@ -28,7 +28,7 @@ export default function PainelPage() {
       </Link>
 
       <section className={styles.sectionCards}>
-        <Link className={styles.card} href={'#'}>
+        <Link className={styles.card} href={'https://wa.me/+5562984920780'}>
           <Image src={Whatsapp} alt="suporte whatsapp" />
         </Link>
         <Link className={styles.card} href={'#'}>

@@ -30,6 +30,12 @@
   gap: .5rem;
 }
 
+.deleteAppointment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .noHistory {
   color: #F4EEE0;
   background: linear-gradient(#39364689, #614b62);

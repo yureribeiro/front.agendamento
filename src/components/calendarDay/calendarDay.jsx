@@ -46,7 +46,7 @@ export default function CalendarDay() {
 
     try {
       setLoading(true)
-      const response = await fetch(`http://localhost:3001/appointments/${userId}`, {
+      const response = await fetch(`https://natalia-api.vercel.app/appointments/${userId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,6 +58,9 @@ export default function CalendarDay() {
         setLoading(false)
         await response.json()
         setFeedback(true)
+      } else if (response.status === 400) {
+        setLoading(false)
+        setError('esse horário já foi agendado, tente 2 horas mais tarde ou mais cedo')
       } else {
         setLoading(false)
         setError('Verifique se preencheu corretamente os campos')
@@ -102,6 +105,8 @@ export default function CalendarDay() {
           onChange={(date) => setStartTime(date)}
           showTimeSelect
           showTimeSelectOnly
+          minTime={new Date().setHours(7, 0)}
+          maxTime={new Date().setHours(17, 0)}
           timeIntervals={60}
           timeCaption="Time"
           dateFormat="h:mm aa"
