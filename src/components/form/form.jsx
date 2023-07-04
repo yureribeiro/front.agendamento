@@ -4,10 +4,10 @@ import styles from './form.module.css'
 import { useRouter } from 'next/navigation'
 import { useUserContext } from '@/context'
 export default function Form() {
+  const { handleChangeUser } = useUserContext()
   const [telNumber, setTelNumber] = useState('')
   const [error, setError] = useState('')
   const router = useRouter()
-  const { handleChangeUser } = useUserContext()
   const [loading, setLoading] = useState(false)
 
   async function handleLogin(e) {

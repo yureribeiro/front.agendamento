@@ -20,7 +20,7 @@ export default function HistoryClient() {
       setAppointments(await appointments.json())
     }
     fetchAppointments()
-  }, [])
+  }, [userId])
 
 
   const handleDeleteAppointment = (appointmentId) => {
